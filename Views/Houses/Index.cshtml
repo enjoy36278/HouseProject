@@ -1,0 +1,135 @@
+﻿@model IEnumerable<Project.Models.House>
+
+@{
+    ViewData["Title"] = "房屋資料管理";
+    Layout = "_Layout";
+}
+
+<h1 class="text-center">@ViewData["Title"]</h1>
+
+<form class="d-flex">
+    <input class="form-control w-auto"  type="number" name="houseID" id="houseID" value="@ViewData["houseID"]" placeholder="房屋編號">
+    <button class="btn btn-outline-secondary" type="button" onclick="clearInput()">清除</button>
+    <input class="btn btn-outline-success" type="submit" value="搜尋"></input>
+</form>
+
+@if (Model.Count() == 0)
+{
+    <hr />
+    <h3 class="text-danger text-center">查無房屋資料</h3>
+}
+else
+{
+
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.HouseID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HouseName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Type.TypeName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Square)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Rent)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.City.CityName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.District)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                @* <th>
+            @Html.DisplayNameFor(model => model.Note)
+            </th> *@
+
+                @* <th>
+            @Html.DisplayNameFor(model => model.Member)
+            </th> *@
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="align-middle">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HouseID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HouseName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Type.TypeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Square)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rent)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City.CityName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.District)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    @* <td>
+            @Html.DisplayFor(modelItem => item.Note)
+            </td> *@
+
+                    @* <td>
+            @Html.DisplayFor(modelItem => item.Member.MemberID)
+            </td> *@
+
+                    <td>
+                        @* <a asp-action="Edit" asp-route-id="@item.HouseID">Edit</a> *@
+                        <a asp-action="Delete" asp-route-id="@item.HouseID" asp-route-controllerName="Houses" class="btn btn-danger">刪除</a>
+                        @* <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" onclick="getDetail(@item.HouseID)">
+                刪除
+                </button> *@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">房屋詳細資料</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="deleteDetail">
+            </div>
+            @* <div class="modal-footer">
+            <button type="button" class="btn btn-danger" onclick="">ajax按鈕</button>
+            </div> *@
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function clearInput() {
+            $('#houseID').val('');;
+        }
+    </script>
+
+}

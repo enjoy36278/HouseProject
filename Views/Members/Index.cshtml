@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Project.Models.Member>
+
+@{
+    ViewData["Title"] = "會員資料管理";
+    Layout = "_Layout";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+
+@* <p>
+    <a asp-action="Create">Create New</a>
+</p> *@
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MemberID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MemberName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="align-middle">
+                <td>
+                    @Html.DisplayFor(modelItem => item.MemberID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MemberName)
+                </td>
+
+                <td>
+                    @* @Html.DisplayFor(modelItem => item.Gender) *@
+                    @if (item.Gender)
+                    {
+                        <span>男</span>
+                    }
+                    else
+                    {
+                        <span>女</span>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @* <a asp-action="Edit" asp-route-id="@item.MemberID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.MemberID">Details</a> | *@
+                    <a asp-action="Delete" asp-route-id="@item.MemberID" class="btn btn-danger">刪除</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

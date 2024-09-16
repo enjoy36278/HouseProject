@@ -1,0 +1,69 @@
+﻿@model Project.Models.Member
+
+@{
+    ViewData["Title"] = "加入會員";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@* ViewData["Message"] 有值才顯示 *@
+@* @if (ViewData["Message"] != null)
+{
+    <div class="alert alert-success">
+        @ViewData["Message"]
+    </div>
+} *@
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MemberName" class="control-label"></label>
+                <input asp-for="MemberName" class="form-control" />
+                <span asp-validation-for="MemberName" class="text-danger"></span>
+            </div>
+            @* <div class="form-group form-check">
+            <label class="form-check-label">
+            <input class="form-check-input" asp-for="Gender" /> @Html.DisplayNameFor(model => model.Gender)
+            </label>
+            </div> *@
+            <div class="mt-2">
+                @* <label>@Html.DisplayNameFor(model => model.Gender)</label>
+                <input type="radio" name="Gender" value="true" checked>男
+                <input type="radio" name="Gender" value="false">女 *@
+                <label>@Html.DisplayNameFor(model => model.Gender)</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="Gender" value="true" checked>
+                    <label class="form-check-label">男</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="Gender" value="false">
+                    <label class="form-check-label">女</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <input type="submit" value="送出" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<div class="mt-3">
+    <a asp-controller="FrontHouses" asp-action="Index">回到房屋資料</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

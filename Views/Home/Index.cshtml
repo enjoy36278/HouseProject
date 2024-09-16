@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Project.Models.House>
+
+@{
+    ViewData["Title"] = "Home Page";
+    string a = "";
+    int j=0;
+}
+
+<div class="mt-4 p-5 bg-light text-white shadow rounded jumbotron">
+    <h1 class="display-4 text-center text-shadow-3"><strong>歡迎光臨租屋系統</strong></h1>
+</div>
+<hr />
+
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        @for (int i = 0;i < Model.Count(); i++)
+        {
+            a = i == 0 ? "active" : "";
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="@i" class="@a"></button>
+        }
+       
+    </div>
+    <div class="carousel-inner">
+        @foreach (var item in Model)
+        {
+            a = j == 0 ? "active" : "";
+            <div class="carousel-item @a">
+                <img src="~/images/uploads/@item.PhotoName" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5 class="">@item.HouseName</h5>
+                    <p>@item.City.CityName@item.District@item.Address</p>
+                </div>
+            </div>
+            j++;
+        }
+        
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+

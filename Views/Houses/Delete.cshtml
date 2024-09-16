@@ -1,0 +1,138 @@
+﻿@model Project.Models.House
+
+@{
+    ViewData["Title"] = "房屋詳細資料";
+    Layout = "_Layout";
+}
+
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+
+@if (Model.PhotoName != null)
+{
+    <div>
+        <img src="~/images/uploads/@Model.PhotoName" height="300" />
+    </div>
+    <hr />
+}
+
+
+<div>
+
+
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.HouseID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.HouseID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HouseName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HouseName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Type.TypeName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Type.TypeName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Square)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Square)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Rent)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Rent)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.City.CityName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.City.CityName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.District)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.District)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+        <dd class = "col-sm-10">
+            @* @Html.DisplayFor(model => model.Note) *@
+            @if (Model.Note != null)
+            {
+                @Html.Raw(Model.Note.ToString().Replace("\r\n", "<br>"))
+            }
+        </dd>
+
+        <hr />
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Member.MemberID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Member.MemberID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Member.MemberName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Member.MemberName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Member.Gender)
+        </dt>
+        <dd class="col-sm-10">
+            @if (Model.Member.Gender)
+            {
+                <span>男</span>
+            }
+            else
+            {
+                <span>女</span>
+            }
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Member.Phone)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Member.Phone)
+        </dd>
+        
+    </dl>
+
+   
+    <form asp-action="Delete">
+        @* <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button> *@
+        <input type="hidden" asp-for="HouseID" />
+        <input type="hidden" name="controllerName" value="@ViewData["ControllerName"]" />
+        <input type="submit" value="刪除" class="btn btn-danger" onclick="return confirm('您確定要刪除此筆房屋資料嗎？')" /> 
+    </form>
+</div>
+
+<div class="mt-3">
+    @if (ViewData["ControllerName"] as string == "Houses")
+    {
+        <a asp-action="Index">回到房屋資料管理</a>
+    }
+    else
+    {
+        <a asp-controller="Members" asp-action="Delete" asp-route-id="@Model.MemberID">回到會員資料</a>
+    }   
+</div>

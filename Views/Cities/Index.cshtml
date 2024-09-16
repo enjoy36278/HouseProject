@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Project.Models.City>
+
+@{
+    ViewData["Title"] = "縣市資料管理";
+    Layout = "_Layout";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">新增</a>
+</p>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CityID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CityName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr class="align-middle">
+            <td>
+                @Html.DisplayFor(modelItem => item.CityID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CityName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CityID" class="btn btn-warning">編輯</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,45 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.no-border-top {
+    border-top: none !important;
+}
+
+.my-card-img-top {
+    height: 50%; 
+    object-fit: cover; 
+}
+
+.text-shadow-3 {
+    text-shadow: 3px 3px black;
+}
+
+.text-shadow-1 {
+    text-shadow: 1px 1px black;
+}
+
+.jumbotron {
+    background-image: url('/home_title.jpeg');
+    background-repeat: round;
+    background-size: cover;
+}

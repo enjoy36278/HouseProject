@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Project.Models.House>
+
+@{
+    Layout = null;
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.HouseID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HouseName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Square)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.District)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Note)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Member)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HouseID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HouseName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Square)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.District)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City.CityName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Member.MemberID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type.TypeName)
+            </td>
+            <td>
+                
+               @*  <a asp-action="Details" asp-route-id="@item.HouseID">Details</a> | *@
+                 <a asp-action="DeleteHouse" asp-route-id="@item.HouseID">刪除</a>
+
+                 @* <form asp-action="DeleteReBook">
+                     <input type="hidden" value="@item.RId" name="id" />
+                     <input type="submit" value="刪除" class="btn btn-danger" onclick="return confirm('您確定要刪除此篇回覆嗎？')" />
+                 </form> *@
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

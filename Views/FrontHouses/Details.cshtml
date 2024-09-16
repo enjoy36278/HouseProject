@@ -1,0 +1,49 @@
+﻿@model Project.Models.House
+
+@{
+    ViewData["Title"] = "房屋詳細資料";
+}
+
+
+
+<div class="card">
+    @if (Model.PhotoName != null)
+    {
+        <img src="~/images/uploads/@Model.PhotoName" class="img-fluid">
+    }
+    
+    @* <img src="~/images/uploads/@Model.PhotoName" class="card-img-top" height="500"> *@
+    <div class="card-body">
+        <h1>@Model.HouseName</h1>
+        <p>@Model.Type.TypeName | @Model.Square 坪</p>
+        <h3 class="text-danger">@Model.Rent 元/月</h3>
+        <hr />
+        <h3>地址</h3>
+        <p>@Model.City.CityName @Model.District @Model.Address</p>
+
+        
+        @if (Model.Note != null)
+        {
+            <h3>說明</h3>
+            <p>@Html.Raw(Model.Note.ToString().Replace("\r\n", "<br>"))</p>
+        }
+        
+        <hr />
+        <h3>房東</h3>
+        @if (Model.Member.Gender)
+        {
+            <h6>@Model.Member.MemberName 先生</h6>
+        }
+        else
+        {
+            <h6>@Model.Member.MemberName 小姐</h6>
+        }
+
+        <h6>電話 : @Model.Member.Phone</h6>
+        
+    </div>
+</div>
+
+<div class="mt-3">
+    <a asp-action="Index" asp-route-cityID="@Model.CityID">回到房屋資料</a>
+</div>

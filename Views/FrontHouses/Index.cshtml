@@ -1,0 +1,100 @@
+﻿@* @model IEnumerable<Project.Models.House> *@
+
+@model Project.ViewModels.VMHouseCityType
+
+@{
+    ViewData["Title"] = ViewData["cityName"] + "房屋資料";
+
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@* 會員資料新增成功訊息 *@
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<p>
+    <a class="btn btn-primary" asp-action="Create2" asp-route-cityid="@ViewData["cityID"]">我要刊登</a>
+</p>
+
+
+@* <div class=" list-group list-group-horizontal ">
+
+    @foreach (var item in Model.Cities)
+    {
+        <a asp-action="Index" asp-route-cityID="@item.CityID" class="list-group-item list-group-item-action">@item.CityName</a>
+    }
+
+</div> *@
+
+<div>
+    @foreach (var item in Model.Cities)
+    {
+        <a asp-action="Index" asp-route-cityID="@item.CityID">@item.CityName</a>
+    }
+
+    <br />
+
+    <a asp-action="Index" asp-route-cityID="@ViewData["cityID"]">全部</a>
+    @foreach (var item in Model.HouseTypes)
+    {
+        <a asp-action="Index" asp-route-cityID="@ViewData["cityID"]" asp-route-typeID="@item.TypeID">@item.TypeName</a>
+    }
+</div>
+<hr />
+
+<div class="dropdown">
+    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        租金排序
+    </button>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" asp-action="Index" asp-route-cityID="@ViewData["cityID"]" asp-route-typeID="@ViewData["typeID"]" asp-route-sort="rent_desc">租金 : 高到低</a></li>
+        <li><a class="dropdown-item" asp-action="Index" asp-route-cityID="@ViewData["cityID"]" asp-route-typeID="@ViewData["typeID"]" asp-route-sort="rent_asc">租金 : 低到高</a></li>
+    </ul>
+
+    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        坪數排序
+    </button>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" asp-action="Index" asp-route-cityID="@ViewData["cityID"]" asp-route-typeID="@ViewData["typeID"]" asp-route-sort="square_desc">坪數 : 大到小</a></li>
+        <li><a class="dropdown-item" asp-action="Index" asp-route-cityID="@ViewData["cityID"]" asp-route-typeID="@ViewData["typeID"]" asp-route-sort="square_asc">坪數 : 小到大</a></li>
+    </ul>
+</div>
+
+
+<div class="row mt-3">
+
+    @foreach (var item in Model.Houses)
+    {
+        <div class="col-md-6 col-xl-4 g-0">
+            <div class="card h-100 ">
+                @if (item.PhotoName != null)
+                {
+                    <img src="~/images/uploads/@item.PhotoName" class="my-card-img-top" />
+                 
+                }
+
+                <div class="card-body">
+                    <h4 class="card-title">@item.HouseName</h4>
+                    <div class="card-text">@item.Type.TypeName | @item.Square 坪</div>
+                    <div class="card-text">@item.District - @item.Address</div>
+                </div>
+                <div class="card-footer bg-white text-end no-border-top">
+                    <h4 class="card-text text-danger">
+                        @item.Rent 元/月<h4 />
+                        <a asp-action="Details" asp-route-id="@item.HouseID" class="btn btn-success">詳細資料</a>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+
+
+
+

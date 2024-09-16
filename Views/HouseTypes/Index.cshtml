@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Project.Models.HouseType>
+
+@{
+    ViewData["Title"] = "房屋類別管理";
+    Layout = "_Layout";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">新增</a>
+</p>
+
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TypeID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TypeName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr class="align-middle">
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.TypeID" class="btn btn-warning">編輯</a> 
+                @* <a asp-action="Details" asp-route-id="@item.TypeID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.TypeID">Delete</a> *@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
